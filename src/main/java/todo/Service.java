@@ -74,7 +74,7 @@ public final class Service {
         return "Задача была удалена!";
     }
 
-    public void edit() throws EnumException {
+    public void edit() {
         System.out.println("Вот ваш список задач:");
         list().forEach(System.out::println);
         System.out.println();
@@ -135,7 +135,7 @@ public final class Service {
                case 1 -> result.get().setStatus(Status.TODO);
                case 2 -> result.get().setStatus(Status.IN_PROGRESS);
                case 3 -> result.get().setStatus(Status.DONE);
-               default -> throw new EnumException("Да нет такой цифры в списке! Чо ты, хакер, мамкин?!");
+               default -> System.out.println("Да нет такой цифры в списке! Чо ты, хакер, мамкин?!");
            }
            System.out.println("Статус изменен!\n\n");
 
@@ -165,7 +165,7 @@ public final class Service {
             case 3 -> list.stream()
                     .filter(a -> a.getStatus().equals(Status.DONE))
                     .forEach(System.out::println);
-            default -> throw new EnumException("Где ты такую цифру там увидел вообще?! 1, 2 или 3! АЛЛО!");
+            default -> System.out.println("Где ты такую цифру там увидел вообще?! 1, 2 или 3! АЛЛО!");
         }
 
     }
