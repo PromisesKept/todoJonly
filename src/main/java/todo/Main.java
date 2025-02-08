@@ -30,6 +30,7 @@ public class Main {
                 case "edit" -> service.edit();
                 case "filter" -> service.filter();
                 case "sort" -> service.sort();
+                default -> System.out.println("Дружочек, info набери и не выебуйся...");
 
             }
             type = scan.next();

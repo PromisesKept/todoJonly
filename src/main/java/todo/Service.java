@@ -74,7 +74,7 @@ public final class Service {
         return "Задача была удалена!";
     }
 
-    public void edit() {
+    public void edit() throws EnumException {
         System.out.println("Вот ваш список задач:");
         list().forEach(System.out::println);
         System.out.println();
@@ -135,6 +135,7 @@ public final class Service {
                case 1 -> result.get().setStatus(Status.TODO);
                case 2 -> result.get().setStatus(Status.IN_PROGRESS);
                case 3 -> result.get().setStatus(Status.DONE);
+               default -> throw new EnumException("Да нет такой цифры в списке! Чо ты, хакер, мамкин?!");
            }
            System.out.println("Статус изменен!\n\n");
 
@@ -164,6 +165,7 @@ public final class Service {
             case 3 -> list.stream()
                     .filter(a -> a.getStatus().equals(Status.DONE))
                     .forEach(System.out::println);
+            default -> throw new EnumException("Где ты такую цифру там увидел вообще?! 1, 2 или 3! АЛЛО!");
         }
 
     }
@@ -176,10 +178,10 @@ public final class Service {
         System.out.println("Напишите: \n 1 чтобы отсортировать его по сроку выполнения \n 2 чтобы отсортировать его по статусу");
         int sorting = scan.nextInt();
         switch (sorting) {
-            case 1 -> list().stream()
+            case 1 -> list.stream()
                     .sorted(Comparator.comparing(Todo::getDeadline))
                     .forEach(System.out::println);
-            case 2 -> list().stream()
+            case 2 -> list.stream()
                     .sorted(Comparator.comparing(Todo::getStatus))
                     .forEach(System.out::println);
             default -> System.out.println("Ты чо, сук, не понял?! 1 или 2! \n Всё, диннах отсюдава...");
