@@ -11,9 +11,9 @@ import static todo.Main.scan;
 
 public final class Service {
 
-    private static final List<Todo> list = new ArrayList<>();
+    private final List<Todo> list = new ArrayList<>();
 
-    public static void info() {
+    public void info() {
         System.out.println("""
                 add - добавить задачу
                 list - вывести список задач
@@ -29,7 +29,7 @@ public final class Service {
                 """);
     }
 
-    public static void add() {
+    public void add() {
         System.out.println("Введите название задачи (после ввода нажмите Enter):");
         System.out.println();
         String name = scan.nextLine();
@@ -62,11 +62,11 @@ public final class Service {
 
 
 
-    public static List<Todo> list() {
+    public List<Todo> list() {
         return list;
     }
 
-    public static String delete() {
+    public String delete() {
         System.out.println("Введите ID задачи, которую хотите удалить?");
         int id = scan.nextInt();
         scan.nextLine();
@@ -74,7 +74,7 @@ public final class Service {
         return "Задача была удалена!";
     }
 
-    public static void edit() {
+    public void edit() {
         System.out.println("Вот ваш список задач:");
         list().forEach(System.out::println);
         System.out.println();
@@ -142,7 +142,7 @@ public final class Service {
 
     }
 
-    public static void filter() {
+    public void filter() {
 
         System.out.println("""
                 По какому статус Вы хотите отфильтровать задачи?
@@ -168,7 +168,7 @@ public final class Service {
 
     }
 
-    public static void sort() {
+    public void sort() {
         // сортировка задач по сроку выполнения или статусу
         System.out.println("Вот ваш список задач:");
         list().forEach(System.out::println);

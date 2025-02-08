@@ -19,15 +19,17 @@ public class Main {
 
         String type = scan.next();
         scan.nextLine();
+        Service service = new Service();
+
         while (!"exit".equals(type)) {
             switch (type) {
-                case "info" -> Service.info();
-                case "add" -> Service.add();
-                case "list" -> Service.list().forEach(System.out::println);
-                case "delete" -> System.out.println(Service.delete());
-                case "edit" -> Service.edit();
-                case "filter" -> Service.filter();
-                case "sort" -> Service.sort();
+                case "info" -> service.info();
+                case "add" -> service.add();
+                case "list" -> service.list().forEach(System.out::println);
+                case "delete" -> System.out.println(service.delete());
+                case "edit" -> service.edit();
+                case "filter" -> service.filter();
+                case "sort" -> service.sort();
 
             }
             type = scan.next();
