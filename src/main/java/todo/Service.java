@@ -9,9 +9,9 @@ import java.util.Optional;
 
 import static todo.Main.scan;
 
-public class Service {
+public final class Service {
 
-    private static final List<Todo> list = new ArrayList<Todo>();
+    private static final List<Todo> list = new ArrayList<>();
 
     public static void info() {
         System.out.println("""
@@ -42,22 +42,18 @@ public class Service {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime deadline = LocalDateTime.parse(dateTime, formatter);
 
-        System.out.println("Введите статус:");
-        String status = scan.nextLine();
-
         System.out.printf("""
                             Вы действительно хотите добавить задачу?
                             
                             Название: %s
                             Описание: %s
                             Срок выполнения: %s
-                            Статус: %s
                             
                             Для добавления нажмите 1, для отмены нажмите 0
                             
-                            """, name, description, deadline, status);
+                            """, name, description, deadline);
         if (scan.nextInt() == 1) {
-            list.add(new Todo(name, description, deadline, status));
+            list.add(new Todo(name, description, deadline));
             System.out.println("Задача была добавлена с ID:" + list.getLast().getId());
         } else
 
@@ -73,6 +69,7 @@ public class Service {
     public static String delete() {
         System.out.println("Введите ID задачи, которую хотите удалить?");
         int id = scan.nextInt();
+        scan.nextLine();
         list.removeIf(todo -> todo.getId() == id);
         return "Задача была удалена!";
     }
@@ -124,23 +121,51 @@ public class Service {
            System.out.println("Сейчас у этой задачи статус: ");
            System.out.println(result.get().getStatus());
            System.out.println();
-           System.out.println("Введите новый статус и нажмите Enter \n или не пишите ничего если не хотите менять его");
-           String status = scan.nextLine();
-           if (!status.isBlank()) {
-               result.get().setStatus(status);
-               System.out.println("Статус изменен!\n\n");
+           System.out.println("""
+                   Чтобы изменить статус введите:
+                   
+                   1 - чтобы поставить статус 'TODO'
+                   2 - чтобы поставить статус 'IN PROGRESS'
+                   3 - чтобы завершить задачу
+                   
+                   """);
+           int status = scan.nextInt();
+           scan.nextLine();
+           switch (status) {
+               case 1 -> result.get().setStatus(Status.TODO);
+               case 2 -> result.get().setStatus(Status.IN_PROGRESS);
+               case 3 -> result.get().setStatus(Status.DONE);
            }
+           System.out.println("Статус изменен!\n\n");
+
        }
 
     }
 
     public static void filter() {
-        System.out.println("Введите статус: ");
-        String status = scan.nextLine();
 
-        list.stream()
-                .filter(a -> a.getStatus().equals(status))
-                .forEach(System.out::println);
+        System.out.println("""
+                По какому статус Вы хотите отфильтровать задачи?
+          
+                1 - статус 'TODO'
+                2 - статус 'IN PROGRESS'
+                3 - только завершенные задачи
+                
+                """);
+        int status = scan.nextInt();
+        scan.nextLine();
+        switch (status) {
+            case 1 -> list.stream()
+                    .filter(a -> a.getStatus().equals(Status.TODO))
+                    .forEach(System.out::println);
+            case 2 -> list.stream()
+                    .filter(a -> a.getStatus().equals(Status.IN_PROGRESS))
+                    .forEach(System.out::println);
+            case 3 -> list.stream()
+                    .filter(a -> a.getStatus().equals(Status.DONE))
+                    .forEach(System.out::println);
+        }
+
     }
 
     public static void sort() {
@@ -162,12 +187,6 @@ public class Service {
 
     }
 
-
-
-    public static void exit() {
-        // выход из системы?
-        System.out.println("Ну, все, вали! Чо ждешь?");
-    }
 
 
 }

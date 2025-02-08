@@ -13,14 +13,14 @@ public class Todo {
     private String name;
     private String description;
     private LocalDateTime deadline;
-    private String status;
+    private Status status;
 
-    public Todo(String name, String description, LocalDateTime deadline, String status) {
+    public Todo(String name, String description, LocalDateTime deadline) {
         this.id = ++counter;
         this.name = name;
         this.description = description;
         this.deadline = deadline;
-        this.status = status;
+        this.status = Status.TODO;
     }
 
 }
