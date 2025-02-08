@@ -15,7 +15,8 @@ public class ServiceTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        Service.info();
+        Service service = new Service();
+        service.info();
 
         // Проверяем его вывод
         String expectedOutput = """
