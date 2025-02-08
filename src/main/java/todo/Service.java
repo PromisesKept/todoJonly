@@ -91,7 +91,7 @@ public final class Service {
         try {
             status = Status.valueOf(statusInput.toUpperCase().replace(" ", "_"));
         } catch (IllegalArgumentException e) {
-            System.out.println("Неверный статус. Пожалуйста, введите один из предложенных вариантов.");
+            System.out.println("Может, раскладку переключить? М? Или чо ты там написать не можешь?");
         }
 
     }
