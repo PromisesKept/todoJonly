@@ -4,9 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
-
-import static todo.Main.scan;
+import java.util.Scanner;
 
 public final class Service {
 
@@ -28,7 +26,7 @@ public final class Service {
                 """);
     }
 
-    public void add() {
+    public void add(Scanner scan) {
         System.out.println("Введите название задачи (после ввода нажмите Enter):");
         System.out.println();
         String name = scan.nextLine();
@@ -63,7 +61,7 @@ public final class Service {
         return todoRepository.getList();
     }
 
-    public String delete() {
+    public String delete(Scanner scan) {
         System.out.println("Введите ID задачи, которую хотите удалить?");
         int id = scan.nextInt();
         scan.nextLine();
@@ -75,7 +73,7 @@ public final class Service {
         todoRepository.edit();
     }
 
-    public void filter() {
+    public void filter(Scanner scan) {
 
         System.out.println("""
                 По какому статус Вы хотите отфильтровать задачи?
@@ -96,7 +94,7 @@ public final class Service {
 
     }
 
-    public void sort() {
+    public void sort(Scanner scan) {
         // сортировка задач по сроку выполнения или статусу
         System.out.println("Вот ваш список задач:");
         list().forEach(System.out::println);

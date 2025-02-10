@@ -24,12 +24,12 @@ public class Main {
         while (!"exit".equals(type)) {
             switch (type) {
                 case "info" -> service.info();
-                case "add" -> service.add();
+                case "add" -> service.add(scan);
                 case "list" -> service.list().forEach(System.out::println);
-                case "delete" -> System.out.println(service.delete());
+                case "delete" -> System.out.println(service.delete(scan));
                 case "edit" -> service.edit();
-                case "filter" -> service.filter();
-                case "sort" -> service.sort();
+                case "filter" -> service.filter(scan);
+                case "sort" -> service.sort(scan);
                 default -> System.out.println("Дружочек, info набери и не выебуйся...");
 
             }
